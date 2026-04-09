@@ -69,6 +69,7 @@ class TerrainProtocolHandler;
 class TrajectoryPoints;
 class VehicleObjectAvoidance;
 class VehicleSupports;
+class VehicleTunnelGPS;
 
 namespace events {
 namespace parser {
@@ -230,6 +231,7 @@ public:
     Q_PROPERTY(VehicleObjectAvoidance*  objectAvoidance     READ objectAvoidance    CONSTANT)
     Q_PROPERTY(Autotune*                autotune            READ autotune           CONSTANT)
     Q_PROPERTY(RemoteIDManager*         remoteIDManager     READ remoteIDManager    CONSTANT)
+    Q_PROPERTY(VehicleTunnelGPS*        tunnelGps           READ tunnelGps          CONSTANT)
 
     // FactGroup object model properties
 
@@ -585,6 +587,7 @@ public:
     VehicleObjectAvoidance*         objectAvoidance     () { return _objectAvoidance; }
     Autotune*                       autotune            () const { return _autotune; }
     RemoteIDManager*                remoteIDManager     () { return _remoteIDManager; }
+    VehicleTunnelGPS*               tunnelGps           () const { return _tunnelGps; }
 
     static void showCommandAckError(const mavlink_command_ack_t& ack);
 
@@ -1251,6 +1254,7 @@ public:
     InitialConnectStateMachine*     _initialConnectStateMachine = nullptr;
     Actuators*                      _actuators                  = nullptr;
     RemoteIDManager*                _remoteIDManager            = nullptr;
+    VehicleTunnelGPS*               _tunnelGps                 = nullptr;
     StandardModes*                  _standardModes              = nullptr;
 
     // Terrain query members, used to get terrain altitude for doSetHome()

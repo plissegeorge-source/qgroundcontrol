@@ -60,6 +60,7 @@
 #include "TrajectoryPoints.h"
 #include "VehicleLinkManager.h"
 #include "VehicleObjectAvoidance.h"
+#include "VehicleTunnelGPS.h"
 #include "VideoManager.h"
 #include "VideoSettings.h"
 #include "DeviceInfo.h"
@@ -288,6 +289,8 @@ void Vehicle::_commonInit(LinkInterface* link)
 
     // Remote ID manager might want to acces parameters so make sure to create it after
     _remoteIDManager = new RemoteIDManager(this);
+
+    _tunnelGps = new VehicleTunnelGPS(this);
 
     // Flight modes can differ based on advanced mode
     connect(QGCCorePlugin::instance(), &QGCCorePlugin::showAdvancedUIChanged, this, &Vehicle::flightModesChanged);
@@ -673,6 +676,12 @@ void Vehicle::_mavlinkMessageReceived(LinkInterface* link, mavlink_message_t mes
         break;
     case MAVLINK_MSG_ID_FENCE_STATUS:
         _handleFenceStatus(message);
+        break;
+
+    case MAVLINK_MSG_ID_TUNNEL:
+        if (_tunnelGps && (message.compid == MAV_COMP_ID_UDP_BRIDGE)) {
+            _tunnelGps->handleTunnelMessage(message);
+        }
         break;
 
     case MAVLINK_MSG_ID_EVENT:
