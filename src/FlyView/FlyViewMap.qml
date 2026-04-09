@@ -314,6 +314,13 @@ FlightMap {
         }
     }
 
+
+    FlyViewTunnelGpsOverlay {
+        mapControl: _root
+        vehicle: _activeVehicle
+        z: QGroundControl.zOrderWidgets
+    }
+
     // Allow custom builds to add map items
     CustomMapItems {
         map:            _root
