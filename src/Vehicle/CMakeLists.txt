@@ -31,6 +31,8 @@ target_sources(${CMAKE_PROJECT_NAME}
         VehicleLinkManager.h
         VehicleObjectAvoidance.cc
         VehicleObjectAvoidance.h
+        VehicleTunnelGPS.cc
+        VehicleTunnelGPS.h
         VehicleSupports.cc
         VehicleSupports.h
         VehicleTypes.h
